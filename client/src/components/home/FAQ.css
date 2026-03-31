@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* BACKGROUND */
+.faq-container {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #eef2f7, #ffffff);
+}
+
+/* TITLE */
+.faq-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+/* WRAPPER */
+.faq-wrapper {
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* CARD */
+.faq-item {
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* HOVER EFFECT */
+.faq-item:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* QUESTION */
+.faq-question {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #222;
+}
+
+/* ICON */
+.faq-icon {
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+}
+
+/* ANSWER (SMOOTH ANIMATION FIX 🔥) */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.4s ease;
+  padding: 0 20px;
+}
+
+/* ACTIVE STATE */
+.faq-item.active {
+  background: linear-gradient(135deg, #ffffff, #f9fafc);
+}
+
+/* EXPAND */
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding: 15px 20px 20px;
+}
+
+/* TEXT */
+.faq-answer p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ICON ROTATE */
+.faq-item.active .faq-icon {
+  transform: rotate(180deg) scale(1.2);
+  color: #007bff;
+}
+
+/* GRADIENT BORDER EFFECT */
+.faq-item.active {
+  border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .faq-title {
+    font-size: 2rem;
+  }
+
+  .faq-question {
+    font-size: 0.95rem;
+  }
+}

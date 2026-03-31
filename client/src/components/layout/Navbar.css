@@ -1,0 +1,144 @@
+/* MAIN NAV */
+.nav-main {
+  position: fixed;
+  width: 100%;
+  top: -20;
+  z-index: 1000;
+  background: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+
+/* WRAP */
+.nav-wrap {
+  max-width: 1200px;
+  margin: auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
+.nav-logo img {
+  width: 130px;
+}
+
+/* LINKS */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #e11d48;
+}
+
+.nav-link .underline {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: red;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+
+.nav-link:hover .underline,
+.nav-link.active .underline {
+  width: 100%;
+}
+
+/* BUTTON */
+.nav-btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: #e11d48;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.nav-btn.outline {
+  background: transparent;
+  border: 1px solid #e11d48;
+  color: #e11d48;
+}
+
+/* ACTIONS */
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* HAMBURGER */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.nav-hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+/* ANIMATION */
+.nav-hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* MOBILE MENU */
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.nav-mobile.show {
+  display: flex;
+}
+
+.nav-mobile-link {
+  padding: 10px 0;
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+}
+
+.nav-btn.mobile {
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-actions {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+}

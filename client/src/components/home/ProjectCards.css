@@ -1,0 +1,235 @@
+/* ===============================
+   PREMIUM NGO CARD DESIGN 💎
+   =============================== */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ROOT */
+:root {
+  --bg: #ffffff;
+  --card: rgba(255, 255, 255, 0.85);
+  --text: #111;
+  --subtext: #555;
+}
+
+/* SECTION */
+.ngo-section {
+  padding: 140px 20px;
+  background: linear-gradient(135deg, #ffffff, #f5f7fa);
+  font-family: "Raleway", sans-serif;
+}
+
+/* HEADER */
+.ngo-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.ngo-header h2 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.ngo-header p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: var(--subtext);
+}
+
+/* GRID */
+.ngo-container {
+  max-width: 1350px;
+  margin: auto;
+}
+
+.ngo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+}
+
+/* CARD */
+.ngo-card {
+  border-radius: 30px;
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+/* WHITE SOFT BORDER SHADOW 🔥 */
+.ngo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ffffff, #f1f1f1);
+  z-index: -1;
+  filter: blur(12px);
+  opacity: 0.8;
+}
+
+/* INNER */
+.ngo-card-inner {
+  background: var(--card);
+  border-radius: 30px;
+  padding: 35px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* SOFT SHADOW */
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.05),
+    inset 0 1px 1px rgba(255,255,255,0.6);
+}
+
+/* HOVER EFFECT 🔥 */
+.ngo-card:hover {
+  transform: translateY(-15px) scale(1.03);
+}
+
+.ngo-card:hover .ngo-avatar {
+  transform: scale(1.15);
+}
+
+.ngo-card:hover .ngo-card-inner {
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.12),
+    inset 0 1px 2px rgba(255,255,255,0.7);
+}
+
+/* TOP */
+.ngo-content-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+/* IMAGE */
+.ngo-avatar {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 22px;
+  transition: 0.4s ease;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+/* TEXT */
+.ngo-text-side h3 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.ngo-text-side p {
+  font-size: 15px;
+  color: var(--subtext);
+  line-height: 1.7;
+}
+
+/* FOOTER */
+.ngo-card-footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* DATE */
+.ngo-footer-text {
+  font-size: 14px;
+  color: #888;
+}
+
+/* BUTTON */
+.ngo-btn {
+  padding: 12px 26px;
+  border-radius: 50px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* BUTTON HOVER */
+.ngo-btn:hover {
+  background: #000;
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* ENTRY ANIMATION */
+.ngo-card {
+  animation: smoothFade 0.7s ease forwards;
+  opacity: 0;
+}
+
+.ngo-card:nth-child(1) { animation-delay: 0.1s; }
+.ngo-card:nth-child(2) { animation-delay: 0.2s; }
+.ngo-card:nth-child(3) { animation-delay: 0.3s; }
+.ngo-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes smoothFade {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .ngo-header h2 {
+    font-size: 2.4rem;
+  }
+
+  .ngo-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .ngo-text-side h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ngo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ngo-content-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ngo-avatar {
+    width: 100%;
+    height: 180px;
+  }
+
+  .ngo-card-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .ngo-btn {
+    width: 100%;
+  }
+}

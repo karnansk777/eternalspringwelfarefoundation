@@ -1,0 +1,121 @@
+.ngo3-section {
+  width: 100%;
+  padding: 90px 20px;
+  background: #f9fbfd;
+  text-align: center;
+}
+
+.ngo3-title {
+  font-size: 32px;
+  margin-bottom: 50px;
+  color: #222;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Wrapper */
+.ngo3-wrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Slider */
+.ngo3-slider {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.ngo3-track {
+  display: flex;
+  gap: 20px; /* 🔥 space between cards */
+  transition: transform 0.5s ease;
+}
+
+/* Card */
+.ngo3-card {
+  flex: 0 0 calc(100% / 3 - 14px);
+  background: #ffffff;
+  padding: 25px 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.ngo3-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+.ngo3-card img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border: 3px solid #e6f7ec;
+}
+
+/* Name */
+.ngo3-card h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #1e7f4f;
+  font-weight: 600;
+}
+
+/* Text */
+.ngo3-card p {
+  font-size: 14.5px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.ngo3-btn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  border: none;
+  padding: 12px 14px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.ngo3-btn:hover {
+  background: #1e7f4f;
+  color: #fff;
+}
+
+.ngo3-btn.left {
+  left: -20px;
+}
+
+.ngo3-btn.right {
+  right: -20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ngo3-card {
+    flex: 0 0 calc(100% / 2 - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .ngo3-card {
+    flex: 0 0 100%;
+  }
+
+  .ngo3-btn {
+    display: none;
+  }
+}

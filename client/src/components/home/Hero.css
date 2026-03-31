@@ -1,0 +1,128 @@
+.hero-xyz-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* center horizontally */
+    font-family: "Open Sans", Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+    overflow: hidden;
+    text-align: center; /* center text */
+  }
+  
+  /* Background video */
+  .hero-xyz-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.5);
+  }
+  
+  /* Dark overlay */
+  .hero-xyz-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  
+  /* Centered content wrapper */
+  .hero-xyz-center {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .hero-xyz-center h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+  
+  .hero-xyz-center .hero-xyz-highlight {
+    color: #e90e0e;
+    margin-right: 0.3em;
+  }
+  
+  .hero-xyz-center .hero-xyz-normal {
+    color: #fff;
+  }
+  
+  .hero-xyz-center p {
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 0.5rem;color: white;
+  }
+  
+  .hero-xyz-center .hero-xyz-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .hero-xyz-center .hero-xyz-buttons button {
+    padding: 18px 25px;
+    font-weight: bold;
+    border: none;   
+    cursor: pointer;
+    border-radius: 40px;
+    transition: 0.3s;
+  }
+  
+  /* Donate button */
+  .hero-xyz-donate-btn {
+    color: #000000;
+    background-color: #ffffff;
+  }
+  
+  .hero-xyz-donate-btn:hover {
+    background-color: #ffbf00;
+  }
+  
+  /* Join button */
+  .hero-xyz-join-btn {
+    background-color: transparent;
+    color: red;
+    border: 2px solid #0ea5e9;
+  }
+  
+  .hero-xyz-join-btn:hover {
+    background-color: #0ea5e9;
+    color: #000000;
+  }
+  
+  /* Optional floating glow */
+  .hero-xyz-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3rem);
+    opacity: 0.2;
+    z-index: 0;
+  }
+  
+  .hero-xyz-glow.red-large {
+    width: 300px;
+    height: 300px;
+    background-color: #0ea5e9;
+    top: 50px;
+    left: 50px;
+  }
+  
+  .hero-xyz-glow.red-small {
+    width: 200px;
+    height: 200px;
+    background-color: #38bdf8;
+    bottom: 50px;
+    right: 50px;
+  }

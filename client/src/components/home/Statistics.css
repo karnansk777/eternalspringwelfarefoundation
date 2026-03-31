@@ -1,0 +1,123 @@
+/* =========================
+   SECTION
+========================= */
+.stat-xyz-section {
+    position: relative;
+    padding: 80px 20px;
+    background: #F44336;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Raleway", sans-serif;
+  }
+  
+  /* =========================
+     WRAPPER (2 COLUMN)
+  ========================= */
+  .stat-xyz-wrapper {
+    display: flex;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+  }
+  
+  /* =========================
+     LEFT CONTENT
+  ========================= */
+  .stat-xyz-left {
+    flex: 1;
+    color: #fff;
+  }
+  
+  .stat-xyz-left h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: #000;
+  }
+  
+  .stat-xyz-left p {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+  
+  .stat-xyz-btn {
+    padding: 12px 30px;
+    border-radius: 40px;
+    border: none;
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .stat-xyz-btn:hover {
+    transform: scale(1.05);
+    background: #ff3b3b;
+  }
+  
+  /* =========================
+     RIGHT GRID (2x2)
+  ========================= */
+  .stat-xyz-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  /* CARD */
+  .stat-xyz-card {
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: 0.3s;
+  }
+  
+  .stat-xyz-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  }
+  
+  /* ICON */
+  .stat-xyz-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  
+  /* NUMBER */
+  .stat-xyz-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #000000;
+  }
+  
+  /* TEXT */
+  .stat-xyz-text {
+    font-size: 1rem;
+    color: #000000;
+  }
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  @media (max-width: 900px) {
+    .stat-xyz-wrapper {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .stat-xyz-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .stat-xyz-container {
+      grid-template-columns: 1fr;
+    }
+  }

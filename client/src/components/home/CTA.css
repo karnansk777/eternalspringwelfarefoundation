@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/* SECTION */
+.support-section {
+  background: white;
+  color: #000000;
+  padding: 90px 20px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* SOFT LIGHT GLOW BACKGROUND */
+.support-section::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  top: -150px;
+  left: -150px;
+  filter: blur(100px);
+}
+
+.support-section::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  bottom: -120px;
+  right: -120px;
+  filter: blur(100px);
+}
+
+/* CONTENT */
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+/* TITLE */
+.support-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+/* TEXT */
+.support-text {
+  font-size: 1.2rem;
+  margin-bottom: 35px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ff2323;
+}
+
+/* ACTIONS */
+.support-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* 🔥 BUTTON */
+.btn-contribute {
+  background: #F44336;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+/* BUTTON HOVER EFFECT */
+.btn-contribute::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  transition: 0.4s ease;
+}
+
+.btn-contribute:hover::before {
+  width: 100%;
+}
+
+.btn-contribute span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-contribute:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* LINK */
+
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .support-title {
+    font-size: 2rem;
+  }
+
+  .support-text {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,148 @@
+/* ===== FOOTER BASE ===== */
+.footer {
+  background: #0f172a; /* dark navy */
+  color: #e2e8f0;
+  padding: 3rem 2rem 1rem;
+  font-family: "Raleway", sans-serif;
+}
+
+/* ===== CONTAINER ===== */
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+/* ===== BRAND ===== */
+.footer-brand h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #cbd5f5;
+}
+
+/* ===== LINKS ===== */
+.footer-links h3,
+.footer-contact h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #cbd5f5;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #38bdf8;
+  padding-left: 5px;
+}
+
+/* ===== CONTACT ===== */
+.footer-contact p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== SOCIAL ICONS ===== */
+.footer-socials {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  background: #38bdf8;
+  color: #000;
+  transform: translateY(-5px) scale(1.1);
+}
+
+/* ===== BOTTOM ===== */
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #334155;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .footer {
+    padding: 2rem 1.2rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-contact {
+    align-items: center;
+  }
+
+  .footer-links ul {
+    padding: 0;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+
+  .footer-brand h2 {
+    font-size: 1.6rem;
+  }
+
+  .footer-links h3,
+  .footer-contact h3 {
+    font-size: 1.2rem;
+  }
+}
