@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./SuccessStories.css";
+import { getApiUrl } from "@/lib/api";
 
 export default function SuccessStories() {
   const [stories, setStories] = useState([]);
@@ -12,9 +13,7 @@ export default function SuccessStories() {
 
   const fetchStories = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/admin/projects/public"
-      );
+      const res = await axios.get(getApiUrl("/api/admin/projects/public"));
       setStories(res.data);
     } catch (err) {
       console.error("Error fetching stories:", err);
@@ -44,7 +43,7 @@ export default function SuccessStories() {
             <img
               src={
                 story.image_url
-                  ? `http://localhost:5000${story.image_url}`
+                  ? getApiUrl(story.image_url)
                   : "/images/img.jpeg"
               }
               alt={story.title}

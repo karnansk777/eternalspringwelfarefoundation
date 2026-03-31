@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { getApiUrl } from "@/lib/api";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/login", {
+      const res = await axios.post(getApiUrl("/api/admin/login"), {
         email,
         password
       });

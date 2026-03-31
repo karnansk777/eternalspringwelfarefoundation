@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Contact.css";
+import { getApiUrl } from "@/lib/api";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ export default function Contact() {
     setSuccess("");
 
     try {
-      await axios.post("http://localhost:5000/api/contact", formData);
+      await axios.post(getApiUrl("/api/contact"), formData);
 
       setSuccess("✅ Message sent successfully!");
       setFormData({

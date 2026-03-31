@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Volunteer.css";
+import { getApiUrl } from "@/lib/api";
 
 export default function Volunteer() {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ export default function Volunteer() {
     setSuccess("");
 
     try {
-      await axios.post("http://localhost:5000/api/volunteers", formData);
+      await axios.post(getApiUrl("/api/volunteers"), formData);
 
       setSuccess("🎉 Thank you for joining as a volunteer!");
 

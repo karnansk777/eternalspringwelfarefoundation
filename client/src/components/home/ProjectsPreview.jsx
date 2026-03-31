@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ProjectCards.css";
+import { getApiUrl } from "@/lib/api";
 
 export default function NgoCards() {
   const [projects, setProjects] = useState([]);
@@ -13,9 +14,7 @@ export default function NgoCards() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/admin/projects/public"
-      );
+      const res = await axios.get(getApiUrl("/api/admin/projects/public"));
       setProjects(res.data);
     } catch (err) {
       console.error("Error fetching projects", err);
@@ -59,9 +58,7 @@ export default function NgoCards() {
                   {/* IMAGE */}
                   <img
   src={
-    item.image_url
-      ? `http://localhost:5000${item.image_url}`
-      : "/images/img.jpeg"
+    item.image_url ? getApiUrl(item.image_url) : "/images/img.jpeg"
   }
   alt={item.title}
   className="ngo-avatar"

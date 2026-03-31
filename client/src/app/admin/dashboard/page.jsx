@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import "./AdminDashboard.css";
+import { API_BASE_URL } from "@/lib/api";
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = API_BASE_URL;
 
   const [activeTab, setActiveTab] = useState("dashboard");
   const [data, setData] = useState([]);

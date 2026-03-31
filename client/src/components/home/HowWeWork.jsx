@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import "./HowWeWork.css";
+import { getApiUrl } from "@/lib/api";
 
 export default function HowWeWorkHover() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/admin/programs/public")
+    fetch(getApiUrl("/api/admin/programs/public"))
       .then((res) => res.json())
       .then((data) => setCards(data))
       .catch((err) => console.error(err));
@@ -40,9 +41,7 @@ export default function HowWeWorkHover() {
               className="howwework-hover-back"
               style={{
                 backgroundImage: `url(${
-                  card.image_url
-                    ? `http://localhost:5000${card.image_url}`
-                    : "/images/img.jpeg"
+                  card.image_url ? getApiUrl(card.image_url) : "/images/img.jpeg"
                 })`,
               }}
             ></div>
