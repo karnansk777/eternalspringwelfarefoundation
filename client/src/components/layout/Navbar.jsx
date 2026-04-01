@@ -27,8 +27,11 @@ export default function Navbar() {
     { name: "About", path: "/about" },
     { name: "Projects", path: "/projects" },
     { name: "Stories", path: "/stories" },
+    { name: "Gallery", path: "/gallery" },
     { name: "Blog", path: "/blog" },
     { name: "Volunteer", path: "/volunteer" },
+    { name: "Transparency", path: "/transparency" },
+    { name: "80G", path: "/80g-certificate" },
     { name: "Contact", path: "/contact" },
   ];
 

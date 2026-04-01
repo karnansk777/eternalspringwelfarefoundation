@@ -82,6 +82,18 @@
   position: relative;
   overflow: hidden;
   transition: all 0.4s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-contribute.btn-outline {
+  background: transparent;
+  color: #F44336;
+  border: 2px solid #F44336;
+}
+
+.btn-contribute.btn-outline:hover {
+  background: rgba(244, 67, 54, 0.08);
 }
 
 /* BUTTON HOVER EFFECT */

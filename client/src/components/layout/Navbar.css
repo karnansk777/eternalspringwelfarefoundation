@@ -2,7 +2,8 @@
 .nav-main {
   position: fixed;
   width: 100%;
-  top: -20;
+  top: 0;
+  left: 0;
   z-index: 1000;
   background: #ffffff;
   border-bottom: 1px solid #eee;

@@ -7,16 +7,13 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
-
-        {/* Brand */}
         <div className="footer-brand">
-          <h2>Eternal Spring</h2>
+          <h2>Eternal Spring Welfare Foundation</h2>
           <p>
             Together we create hope, change lives, and build a better future.
           </p>
         </div>
 
-        {/* Links */}
         <div className="footer-links">
           <h3>Quick Links</h3>
           <ul>
@@ -30,18 +27,26 @@ export default function Footer() {
               <Link href="/stories">Stories</Link>
             </li>
             <li>
+              <Link href="/gallery">Gallery</Link>
+            </li>
+            <li>
+              <Link href="/transparency">Transparency</Link>
+            </li>
+            <li>
+              <Link href="/80g-certificate">80G certificate</Link>
+            </li>
+            <li>
               <Link href="/contact">Contact</Link>
             </li>
           </ul>
         </div>
 
-        {/* Contact */}
         <div className="footer-contact">
           <h3>Contact</h3>
-          <p>📧 support@ngo.org</p>
-          <p>📞 +91 9876543210</p>
+          <p>📍 Kolkata, West Bengal</p>
+          <p>📞 8017555155</p>
+          <p>📧 info@eternalspringwelfarefoundation.org</p>
 
-          {/* Social Icons */}
           <div className="footer-socials">
             <a href="#" aria-label="Instagram">📸</a>
             <a href="#" aria-label="Facebook">📘</a>
@@ -49,12 +54,10 @@ export default function Footer() {
             <a href="#" aria-label="YouTube">▶️</a>
           </div>
         </div>
-
       </div>
 
-      {/* Bottom */}
       <div className="footer-bottom">
-        © 2026 Eternal Spring | Made with ❤️
+        © 2026 Eternal Spring Welfare Foundation | Made with ❤️
       </div>
     </footer>
   );

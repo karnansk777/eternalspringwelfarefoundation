@@ -73,6 +73,13 @@
 .howwework-hover-card:nth-child(2) { animation-delay: 0.2s; }
 .howwework-hover-card:nth-child(3) { animation-delay: 0.3s; }
 .howwework-hover-card:nth-child(4) { animation-delay: 0.4s; }
+.howwework-hover-card:nth-child(5) { animation-delay: 0.5s; }
+
+.focus-area-icon {
+  display: block;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
 
 /* FRONT & BACK */
 .howwework-hover-front,

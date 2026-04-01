@@ -1,161 +1,282 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import "./Volunteer.css";
+import Link from "next/link";
+import "../../app/about/AboutPage.css";
+import "../../app/volunteer/VolunteerPage.css";
 import { getApiUrl } from "@/lib/api";
+
+const THANK_YOU =
+  "Thank you for your interest in volunteering with Eternal Spring Welfare Foundation.";
+
+const THANK_YOU_SUB = "Our team will connect with you shortly.";
+
+const AREA_OPTIONS = [
+  { value: "", label: "Select area of interest" },
+  { value: "Education", label: "Education" },
+  { value: "Social Work", label: "Social Work" },
+  { value: "Fundraising", label: "Fundraising" },
+  { value: "Digital Support", label: "Digital Support" },
+];
+
+const AVAILABILITY_OPTIONS = [
+  { value: "", label: "Select availability" },
+  { value: "Part-time", label: "Part-time" },
+  { value: "Full-time", label: "Full-time" },
+];
 
 export default function Volunteer() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    skills: "",
+    email: "",
+    city: "",
+    areaOfInterest: "",
     availability: "",
     message: "",
   });
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
+  const successRef = useRef(null);
 
-  // HANDLE INPUT
+  useEffect(() => {
+    if (success && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [success]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // SUBMIT FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess("");
+    setSuccess(false);
+
+    const cityLine = formData.city.trim();
+    const body = formData.message.trim();
+    const messageParts = [];
+    if (cityLine) messageParts.push(`City: ${cityLine}`);
+    if (body) messageParts.push(body);
+    const combinedMessage =
+      messageParts.length > 0 ? messageParts.join("\n\n") : "(No message)";
+
+    const payload = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      skills: formData.areaOfInterest,
+      availability: formData.availability,
+      message: combinedMessage,
+    };
 
     try {
-      await axios.post(getApiUrl("/api/volunteers"), formData);
-
-      setSuccess("🎉 Thank you for joining as a volunteer!");
-
+      await axios.post(getApiUrl("/api/volunteers"), payload);
+      setSuccess(true);
       setFormData({
         name: "",
-        email: "",
         phone: "",
-        skills: "",
+        email: "",
+        city: "",
+        areaOfInterest: "",
         availability: "",
         message: "",
       });
     } catch (err) {
       console.error(err);
-      alert("Something went wrong ❌");
+      alert("Something went wrong. Please try again or call us at 8017555155.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="volunteer-container">
+    <main className="volunteer-page about-page">
+      <header className="about-page-hero">
+        <h1>Become a Volunteer</h1>
+        <p>
+          Join us in creating meaningful change. Your time and effort can transform lives.
+        </p>
+      </header>
 
-      {/* LEFT FORM */}
-      <div className="volunteer-right">
-        <form className="volunteer-form" onSubmit={handleSubmit}>
+      <div className="about-page-inner volunteer-page-inner">
+        <section className="about-page-section" aria-labelledby="vol-intro">
+          <h2 id="vol-intro">Volunteers at Eternal Spring</h2>
+          <p>
+            At Eternal Spring Welfare Foundation, volunteers are the backbone of our work.
+            Whether you can give a few hours or long-term support, your contribution matters.
+          </p>
+          <p className="contact-highlight">Together, we can make a difference.</p>
+        </section>
 
-          <h2>Join Us</h2>
+        <section className="about-page-section" aria-labelledby="vol-why">
+          <h2 id="vol-why">Why volunteer with us</h2>
+          <ul className="about-page-mission-list">
+            <li>Make a real impact in communities</li>
+            <li>Gain meaningful experience</li>
+            <li>Be part of social change</li>
+            <li>Work with a passionate team</li>
+          </ul>
+        </section>
 
-          {success && <p className="success-msg">{success}</p>}
+        <section className="about-page-section" aria-labelledby="vol-opps">
+          <h2 id="vol-opps">Volunteer opportunities</h2>
+          <ul className="volunteer-opportunities-list">
+            <li>Community outreach programs</li>
+            <li>Awareness campaigns</li>
+            <li>Teaching &amp; mentoring children</li>
+            <li>Event &amp; fundraising support</li>
+            <li>Social media &amp; digital volunteering</li>
+          </ul>
+        </section>
+      </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <label>Full Name *</label>
+      <section className="volunteer-form-section" aria-labelledby="volunteer-form-heading">
+        <div className="volunteer-form-card">
+          <h2 id="volunteer-form-heading">Apply to Volunteer</h2>
+
+          <form className="volunteer-form-grid" onSubmit={handleSubmit}>
+            {success && (
+              <div
+                ref={successRef}
+                className="volunteer-success-panel"
+                role="status"
+                aria-live="polite"
+              >
+                <p>{THANK_YOU}</p>
+                <p>{THANK_YOU_SUB}</p>
+              </div>
+            )}
+
+            <div className="volunteer-form-row">
+              <label className="volunteer-field">
+                <span>Full name</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  autoComplete="name"
+                />
+              </label>
+              <label className="volunteer-field">
+                <span>Phone number</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  autoComplete="tel"
+                />
+              </label>
             </div>
 
-            <div className="form-group">
+            <label className="volunteer-field">
+              <span>Email</span>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                autoComplete="email"
               />
-              <label>Email *</label>
+            </label>
+
+            <label className="volunteer-field">
+              <span>City</span>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+                autoComplete="address-level2"
+              />
+            </label>
+
+            <div className="volunteer-form-row">
+              <label className="volunteer-field">
+                <span>Area of interest</span>
+                <select
+                  name="areaOfInterest"
+                  value={formData.areaOfInterest}
+                  onChange={handleChange}
+                  required
+                >
+                  {AREA_OPTIONS.map((o) => (
+                    <option key={o.value || "empty"} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="volunteer-field">
+                <span>Availability</span>
+                <select
+                  name="availability"
+                  value={formData.availability}
+                  onChange={handleChange}
+                  required
+                >
+                  {AVAILABILITY_OPTIONS.map((o) => (
+                    <option key={o.value || "empty-av"} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
-          </div>
 
-          <div className="form-group">
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-            <label>Phone *</label>
-          </div>
+            <label className="volunteer-field">
+              <span>Message</span>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                placeholder="Tell us briefly about yourself and how you would like to help"
+              />
+            </label>
 
-          <div className="form-group">
-            <input
-              type="text"
-              name="availability"
-              value={formData.availability}
-              onChange={handleChange}
-            />
-            <label>City / Location</label>
-          </div>
+            <button type="submit" className="volunteer-submit-btn" disabled={loading}>
+              {loading ? "Submitting…" : "Submit Application"}
+            </button>
+          </form>
+        </div>
+      </section>
 
-          <div className="form-group">
-            <select
-              name="skills"
-              value={formData.skills}
-              onChange={handleChange}
-              required
-            >
-              <option value=""></option>
-              <option>Teaching</option>
-              <option>Healthcare Support</option>
-              <option>Event Management</option>
-              <option>Fundraising</option>
-            </select>
-            <label>Area of Interest *</label>
-          </div>
-
-          <div className="form-group">
-            <textarea
-              rows="4"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-            ></textarea>
-            <label>Why do you want to volunteer?</label>
-          </div>
-
-          <button className="volunteer-btn" disabled={loading}>
-            {loading ? "Submitting..." : "Join Now 🚀"}
-          </button>
-
-        </form>
-      </div>
-
-      {/* RIGHT IMAGE */}
-      <div className="volunteer-left">
-        <img
-          src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg"
-          alt="Volunteers helping"
-        />
-
-        <div className="volunteer-overlay">
-          <h2>Why Volunteer?</h2>
-          <ul>
-            <li>🌍 Create real impact in communities</li>
-            <li>🤝 Meet passionate people</li>
-            <li>📚 Learn & grow personally</li>
-            <li>❤️ Be part of something meaningful</li>
-          </ul>
+      <div className="volunteer-quick-connect">
+        <div className="volunteer-quick-connect-inner">
+          <h2>Quick connect</h2>
+          <p>
+            <a href="tel:8017555155">8017555155</a>
+          </p>
+          <p>
+            <a href="mailto:info@eternalspringwelfarefoundation.org">
+              info@eternalspringwelfarefoundation.org
+            </a>
+          </p>
         </div>
       </div>
 
-    </div>
+      <section className="about-page-cta" aria-labelledby="volunteer-cta">
+        <h2 id="volunteer-cta">Be the Change You Want to See</h2>
+        <p>Your skills and time can help communities thrive. Take the next step today.</p>
+        <div className="about-page-cta-actions">
+          <Link href="/donate" className="about-page-cta-donate">
+            Donate Now
+          </Link>
+          <Link href="/contact" className="about-page-cta-join">
+            Partner With Us
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

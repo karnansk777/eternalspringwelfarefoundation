@@ -1,14 +1,19 @@
 .hero-xyz-section {
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+    /* Clear fixed navbar + keep headline fully visible (no clipping) */
+    padding: 5.5rem 1.25rem 2.5rem;
     display: flex;
     align-items: center;
-    justify-content: center; /* center horizontally */
+    justify-content: center;
     font-family: "Open Sans", Verdana, Geneva, Tahoma, sans-serif;
     color: #fff;
-    overflow: hidden;
-    text-align: center; /* center text */
+    overflow-x: hidden;
+    overflow-y: visible;
+    text-align: center;
   }
   
   /* Background video */
@@ -23,11 +28,11 @@
     filter: brightness(0.5);
   }
   
-  /* Dark overlay */
+  /* Dark overlay — slightly stronger so white/gold text reads clearly */
   .hero-xyz-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.45);
     z-index: 1;
   }
   
@@ -35,27 +40,37 @@
   .hero-xyz-center {
     position: relative;
     z-index: 2;
-    max-width: 800px;
-    padding: 0 20px;
+    max-width: 920px;
+    width: 100%;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
   
-  .hero-xyz-center h1 {
-    font-size: 5rem;
-    font-weight: 900;
-    line-height: 1.2;
+  /* Two-line headline — avoids awkward wraps hiding “Stronger Communities Tomorrow.” */
+  .hero-headline-line {
+    display: block;
+    width: 100%;
   }
-  
+
+  /* Bright gold accent — readable on dark video */
   .hero-xyz-center .hero-xyz-highlight {
-    color: #e90e0e;
-    margin-right: 0.3em;
+    color: #ffe082;
+    text-shadow:
+      0 0 1px rgba(0, 0, 0, 0.8),
+      0 2px 8px rgba(0, 0, 0, 0.9),
+      0 4px 24px rgba(0, 0, 0, 0.5);
   }
-  
+
   .hero-xyz-center .hero-xyz-normal {
-    color: #fff;
+    color: #ffffff;
+    margin-top: 0.35rem;
+    text-shadow:
+      0 0 1px rgba(0, 0, 0, 0.8),
+      0 2px 8px rgba(0, 0, 0, 0.9),
+      0 4px 24px rgba(0, 0, 0, 0.5);
   }
   
   .hero-xyz-center p {
@@ -71,13 +86,45 @@
     flex-wrap: wrap;
   }
   
-  .hero-xyz-center .hero-xyz-buttons button {
+  .hero-xyz-center .hero-xyz-buttons button,
+  .hero-xyz-center .hero-xyz-buttons .hero-link-btn {
     padding: 18px 25px;
     font-weight: bold;
     border: none;   
     cursor: pointer;
     border-radius: 40px;
     transition: 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .hero-final-headline {
+    font-size: clamp(1.65rem, 4.2vw, 3.25rem);
+    font-weight: 900;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .hero-final-sub {
+    font-size: clamp(1rem, 2.2vw, 22px);
+    font-weight: 500;
+    margin-top: 0.5rem;
+    color: #fff;
+    max-width: 42rem;
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.85),
+      0 2px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-trust-line {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff9c4;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
   }
   
   /* Donate button */
@@ -92,14 +139,16 @@
   
   /* Join button */
   .hero-xyz-join-btn {
-    background-color: transparent;
-    color: red;
-    border: 2px solid #0ea5e9;
+    background-color: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: 2px solid #7dd3fc;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   }
   
   .hero-xyz-join-btn:hover {
     background-color: #0ea5e9;
     color: #000000;
+    text-shadow: none;
   }
   
   /* Optional floating glow */

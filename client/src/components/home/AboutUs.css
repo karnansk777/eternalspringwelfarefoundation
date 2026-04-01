@@ -53,6 +53,18 @@
   text-align: center;
   max-width: 850px;
 }
+.about-learn-more {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  border-radius: 40px;
+}
+
+.about-flow-highlight {
+  font-weight: 600;
+  color: #c45c00;
+}
+
 .hero-xyz-donate-btn {
   padding: 10px 20px;
   background-color: #ff3c00;

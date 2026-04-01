@@ -18,3 +18,8 @@ pnpm-debug.log*
 
 .DS_Store
 Thumbs.db
+
+# Static export / local deploy zips (do not commit)
+client/out/
+client/out.zip
+client/*.zip

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import "./AboutUs.css";
 
 export default function AboutSection() {
@@ -22,50 +23,39 @@ export default function AboutSection() {
   return (
     <section className="about-flow-section">
       <div className="about-flow-container">
-
-        {/* 🔝 IMAGE SLIDER */}
-       
-
-        {/* 📜 CONTENT */}
         <div className="about-flow-content">
-          
-          <h2 className="about-flow-heading">About Our NGO</h2>
+          <h2 className="about-flow-heading">Who We Are</h2>
 
           <p className="about-flow-text">
-            Our organization was founded with a simple yet powerful belief — 
-            that every individual deserves dignity, opportunity, and hope. 
-            Over the years, we have worked tirelessly to uplift underprivileged 
-            communities through education, healthcare, and sustainable development initiatives.
+            Eternal Spring Welfare Foundation is a purpose-driven NGO working to create
+            sustainable change at the grassroots level. We focus on empowering individuals
+            through education, skill development, and awareness programs.
           </p>
 
           <p className="about-flow-text">
-            We are not just an NGO; we are a movement driven by compassion and action. 
-            From empowering children with education to supporting families with essential 
-            resources, every step we take is aimed at building a stronger, more inclusive society.
+            As a growing organization, we believe that even small efforts can create meaningful
+            and lasting impact.
           </p>
 
-          <p className="about-flow-text">
-            Our dedicated volunteers and partners play a vital role in transforming lives. 
-            Together, we create real impact by addressing root causes and ensuring long-term change 
-            rather than temporary relief.
+          <p className="about-flow-text about-flow-highlight">
+            👉 Every step we take is towards a better future.
           </p>
-          <button className="hero-xyz-donate-btn">Read More </button>
 
+          <Link href="/about" className="hero-xyz-donate-btn about-learn-more">
+            → Learn More
+          </Link>
 
-          {/* 🌍 MISSION */}
           <div className="about-flow-image-wrapper">
-          {images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt="NGO Work"
-              className={`about-flow-image ${i === index ? "active" : ""}`}
-            />
-          ))}
+            {images.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt="Community work"
+                className={`about-flow-image ${i === index ? "active" : ""}`}
+              />
+            ))}
+          </div>
         </div>
-
-        </div>
-
       </div>
     </section>
   );

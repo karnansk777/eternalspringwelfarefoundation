@@ -1,0 +1,65 @@
+.founders-section {
+  padding: 4rem 1.5rem;
+  background: #ffffff;
+}
+
+.founders-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.founders-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+}
+
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.founders-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: #faf8f5;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.founders-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e63900, #ff8c42);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.founders-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #1a1a1a;
+}
+
+.founders-role {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.founders-tagline {
+  font-weight: 600;
+  color: #444;
+  margin: 0;
+  font-size: 1rem;
+}
