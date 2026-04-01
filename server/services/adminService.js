@@ -9,6 +9,11 @@ import {
   updatePassword
 } from '../models/AdminModel.js';
 
+const getJwtExpiry = () => {
+  const raw = (process.env.JWT_ACCESS_TTL || '').trim().replace(/^['"]|['"]$/g, '');
+  return raw || '15m';
+};
+
 export const loginAdminService = async (email, password) => {
   const admin = await findAdminByEmail(email);
   if (!admin) throw new Error('Invalid credentials');
@@ -19,7 +24,7 @@ export const loginAdminService = async (email, password) => {
   const accessToken = jwt.sign(
     { id: admin.id, role: admin.role },
     process.env.JWT_ACCESS_SECRET,
-    { expiresIn: process.env.JWT_ACCESS_TTL }
+    { expiresIn: getJwtExpiry() }
   );
 
   return { accessToken };
