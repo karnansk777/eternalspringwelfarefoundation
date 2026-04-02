@@ -1,22 +1,24 @@
 "use client";
 import "./QuickImpactStrip.css";
 
-const items = [
-  { icon: "👥", text: "100+ Lives Reached" },
-  { icon: "🤝", text: "Volunteer-Driven Initiatives" },
-  { icon: "🌱", text: "Grassroots Community Work" },
+const stats = [
+  { value: "100+", label: "Lives Reached",    icon: "👥" },
+  { value: "5+",   label: "Active Programs",  icon: "🌱" },
+  { value: "3+",   label: "Ongoing Projects", icon: "📋" },
+  { value: "80G",  label: "Tax Exemption",    icon: "✅" },
 ];
 
 export default function QuickImpactStrip() {
   return (
-    <section className="quick-impact-strip" aria-label="Quick impact">
-      <div className="quick-impact-inner">
-        {items.map((item) => (
-          <div key={item.text} className="quick-impact-item">
-            <span className="quick-impact-icon" aria-hidden>
-              {item.icon}
-            </span>
-            <span>{item.text}</span>
+    <section className="qis-section" aria-label="Impact statistics">
+      <div className="qis-inner">
+        {stats.map((s) => (
+          <div key={s.label} className="qis-item">
+            <span className="qis-icon" aria-hidden>{s.icon}</span>
+            <div className="qis-text">
+              <span className="qis-value">{s.value}</span>
+              <span className="qis-label">{s.label}</span>
+            </div>
           </div>
         ))}
       </div>

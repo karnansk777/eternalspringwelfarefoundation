@@ -1,36 +1,84 @@
-.quick-impact-strip {
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(90deg, #fff8e0 0%, #fff3d6 50%, #fff8e0 100%);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+.qis-section {
+  background: #0f172a;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 2rem 1.5rem;
 }
 
-.quick-impact-inner {
-  max-width: 1100px;
+.qis-inner {
+  max-width: 900px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Each stat cell */
+.qis-item {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  gap: 1.5rem 2.5rem;
+  gap: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.quick-impact-item {
+.qis-item:last-child {
+  border-right: none;
+}
+
+/* Icon */
+.qis-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Text group */
+.qis-text {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.qis-value {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.qis-label {
+  font-size: 0.72rem;
   font-weight: 600;
-  color: #2d2a26;
-  font-size: 0.95rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  line-height: 1.3;
 }
 
-.quick-impact-icon {
-  font-size: 1.35rem;
-}
+/* Mobile: 2x2 grid */
+@media (max-width: 600px) {
+  .qis-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
 
-@media (max-width: 640px) {
-  .quick-impact-inner {
-    flex-direction: column;
-    gap: 0.75rem;
+  .qis-item {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 1rem;
+  }
+
+  /* Remove right border on 2nd and 4th items */
+  .qis-item:nth-child(2),
+  .qis-item:nth-child(4) {
+    border-right: none;
+  }
+
+  /* Remove bottom border on last row */
+  .qis-item:nth-child(3),
+  .qis-item:nth-child(4) {
+    border-bottom: none;
   }
 }

@@ -2,18 +2,32 @@
 
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
-import "../../app/about/AboutPage.css";
 import "./Donate.css";
 
 const PRESETS = [
-  { amount: 100, emoji: "❤️", label: "₹100", desc: "Supports basic learning materials for a child" },
-  { amount: 500, emoji: "💛", label: "₹500", desc: "Helps skill development for youth and women" },
-  { amount: 1000, emoji: "💚", label: "₹1000", desc: "Supports community programs and awareness initiatives" },
+  { amount: 100,  emoji: "📚", label: "₹100",  desc: "Supports basic learning materials for a child" },
+  { amount: 500,  emoji: "🌱", label: "₹500",  desc: "Helps skill development for youth and women" },
+  { amount: 1000, emoji: "🏥", label: "₹1000", desc: "Supports community programs and awareness" },
+  { amount: 0,    emoji: "💙", label: "Custom", desc: "Donate any amount as per your wish" },
+];
+
+const IMPACT_STATS = [
+  { value: "100+", label: "Lives Reached" },
+  { value: "5+",   label: "Active Programs" },
+  { value: "80G",  label: "Tax Exemption" },
+  { value: "12A",  label: "Registered" },
+];
+
+const TRUST_POINTS = [
+  "Donations eligible for tax deduction under Section 80G",
+  "Organisation registered under Section 12A",
+  "Transparent and accountable usage of every rupee",
+  "80G receipt sent to your email within 24–48 hours",
 ];
 
 export default function DonatePage() {
-  const [selected, setSelected] = useState(500);
-  const [mode, setMode] = useState("preset");
+  const [selected, setSelected]       = useState(500);
+  const [mode, setMode]               = useState("preset");
   const [customAmount, setCustomAmount] = useState("");
   const [qrLoadFailed, setQrLoadFailed] = useState(false);
 
@@ -33,75 +47,88 @@ export default function DonatePage() {
       return;
     }
     window.alert(
-      "Add your Razorpay Payment Link in .env as NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK (or connect a backend to create orders for Razorpay Checkout)."
+      "Add your Razorpay Payment Link in .env as NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK."
     );
   }, [paymentLink]);
 
+  const scrollToGiving = () =>
+    document.getElementById("dn-giving")?.scrollIntoView({ behavior: "smooth" });
+
   return (
-    <main className="donate-full-page">
-      <header className="about-page-hero">
-        <h1>Support a Cause. Create Real Impact.</h1>
-        <p>
-          Your contribution can empower lives, support communities, and create a better future.
-        </p>
+    <main className="dn-page">
+
+      {/* ===== HERO ===== */}
+      <header className="dn-hero">
+        <div className="dn-hero-inner">
+          <span className="dn-eyebrow">Make a Difference</span>
+          <h1>Support a Cause.<br />Create Real Impact.</h1>
+          <p>
+            Your contribution empowers lives, supports communities, and creates
+            a better future — every rupee counts.
+          </p>
+          <div className="dn-hero-actions">
+            <button type="button" className="dn-hero-btn primary" onClick={scrollToGiving}>
+              ❤️ Donate Now
+            </button>
+            <Link href="/transparency" className="dn-hero-btn outline">
+              View Transparency
+            </Link>
+          </div>
+        </div>
       </header>
 
-      <div className="about-page-inner">
-        <section className="about-page-section" aria-label="Introduction">
-          <p>
-            At Eternal Spring Welfare Foundation, every donation directly supports our efforts in
-            education, skill development, and community upliftment.
-          </p>
-          <p className="donate-highlight">👉 No amount is small—every contribution matters.</p>
-        </section>
+      {/* ===== IMPACT STATS ===== */}
+      <div className="dn-stats-strip">
+        {IMPACT_STATS.map((s) => (
+          <div className="dn-stat" key={s.label}>
+            <span className="dn-stat-value">{s.value}</span>
+            <span className="dn-stat-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
 
-        <section className="about-page-section" id="impact-giving" aria-labelledby="choose-giving">
-          <h2 id="choose-giving">Choose Your Contribution</h2>
-          <p className="donate-section-eyebrow">Impact-based giving</p>
+      <div className="dn-body">
 
-          <div className="donate-amount-grid">
-            {PRESETS.map((p) => (
-              <button
-                key={p.amount}
-                type="button"
-                className={`donate-amount-card ${mode === "preset" && selected === p.amount ? "active" : ""}`}
-                onClick={() => {
-                  setMode("preset");
-                  setSelected(p.amount);
-                }}
-              >
-                <span className="donate-amount-emoji" aria-hidden>
-                  {p.emoji}
-                </span>
-                <span className="donate-amount-label">{p.label}</span>
-                <span className="donate-amount-desc">{p.desc}</span>
-              </button>
-            ))}
+        {/* ===== CHOOSE AMOUNT ===== */}
+        <section className="dn-section" id="dn-giving" aria-labelledby="dn-giving-heading">
+          <div className="dn-section-label">Impact-Based Giving</div>
+          <h2 id="dn-giving-heading">Choose Your Contribution</h2>
+          <p>Select a preset amount or enter your own. No amount is too small — every contribution matters.</p>
 
-            <button
-              type="button"
-              className={`donate-amount-card custom ${mode === "custom" ? "active" : ""}`}
-              onClick={() => setMode("custom")}
-            >
-              <span className="donate-amount-emoji" aria-hidden>
-                💙
-              </span>
-              <span className="donate-amount-label">Custom Amount</span>
-              <span className="donate-amount-desc">Donate any amount as per your wish</span>
-            </button>
+          <div className="dn-amount-grid">
+            {PRESETS.map((p) => {
+              const isCustomCard = p.amount === 0;
+              const isActive = isCustomCard ? mode === "custom" : mode === "preset" && selected === p.amount;
+              return (
+                <button
+                  key={p.label}
+                  type="button"
+                  className={`dn-amount-card${isActive ? " active" : ""}`}
+                  onClick={() => {
+                    if (isCustomCard) { setMode("custom"); }
+                    else { setMode("preset"); setSelected(p.amount); }
+                  }}
+                >
+                  <span className="dn-amount-emoji" aria-hidden>{p.emoji}</span>
+                  <span className="dn-amount-label">{p.label}</span>
+                  <span className="dn-amount-desc">{p.desc}</span>
+                  {isActive && <span className="dn-amount-check">✔</span>}
+                </button>
+              );
+            })}
           </div>
 
           {mode === "custom" && (
-            <div className="donate-custom-wrap">
-              <label htmlFor="custom-amt" className="donate-custom-label">
-                Enter amount (₹)
+            <div className="dn-custom-wrap">
+              <label htmlFor="dn-custom-amt" className="dn-custom-label">
+                Enter amount (₹) <span>*</span>
               </label>
               <input
-                id="custom-amt"
+                id="dn-custom-amt"
                 type="number"
                 min="1"
                 step="1"
-                className="donate-custom-input"
+                className="dn-custom-input"
                 placeholder="e.g. 750"
                 value={customAmount}
                 onChange={(e) => setCustomAmount(e.target.value)}
@@ -110,137 +137,164 @@ export default function DonatePage() {
           )}
         </section>
 
-        <section className="about-page-section donate-pay-section" aria-labelledby="make-contribution">
-          <h2 id="make-contribution">Make Your Contribution</h2>
+        {/* ===== PAYMENT ===== */}
+        <section className="dn-section dn-pay-section" aria-labelledby="dn-pay-heading">
+          <div className="dn-section-label">Payment</div>
+          <h2 id="dn-pay-heading">Make Your Contribution</h2>
+          <p>Choose UPI/QR scan or pay online via Razorpay — both are safe and instant.</p>
 
-          <div className="donate-pay-grid">
-            <div className="donate-qr-card">
-              <p className="donate-pay-hint">👉 Scan &amp; Pay (UPI / QR Code)</p>
-              {!qrLoadFailed && (
-                <img
-                  src="/images/donation-qr.png"
-                  alt="UPI QR code for donations"
-                  className="donate-qr-img"
-                  onError={() => setQrLoadFailed(true)}
-                />
-              )}
-              {qrLoadFailed && (
-                <div className="donate-qr-placeholder" role="img" aria-label="Add UPI QR image">
-                  <span>Add your QR image as</span>
-                  <code>public/images/donation-qr.png</code>
+          <div className="dn-pay-grid">
+
+            {/* QR CARD */}
+            <div className="dn-pay-card">
+              <div className="dn-pay-card-header">
+                <div className="dn-pay-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5zM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm0 6a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm6-6a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2z"/>
+                  </svg>
+                  Scan &amp; Pay (UPI)
                 </div>
-              )}
+              </div>
+              <div className="dn-qr-wrap">
+                {!qrLoadFailed ? (
+                  <img
+                    src="/images/donation-qr.png"
+                    alt="UPI QR code for donations"
+                    className="dn-qr-img"
+                    onError={() => setQrLoadFailed(true)}
+                  />
+                ) : (
+                  <div className="dn-qr-placeholder">
+                    <span className="dn-qr-ph-icon">📷</span>
+                    <span>Add your QR image as</span>
+                    <code>public/images/donation-qr.png</code>
+                  </div>
+                )}
+              </div>
+              <p className="dn-qr-note">Open any UPI app, scan the code, and complete your payment.</p>
             </div>
 
-            <div className="donate-online-card">
-              <p className="donate-pay-hint">👉 Online Payment (Razorpay)</p>
-              <p className="donate-selected-amt">
+            {/* RAZORPAY CARD */}
+            <div className="dn-pay-card">
+              <div className="dn-pay-card-header">
+                <div className="dn-pay-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                    <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                  </svg>
+                  Pay Online (Razorpay)
+                </div>
+              </div>
+
+              <div className="dn-amount-display">
                 {effectiveAmount > 0 ? (
-                  <>
-                    Selected: <strong>₹{effectiveAmount}</strong>
-                  </>
+                  <div className="dn-amount-pill">
+                    <span className="dn-amount-pill-label">Donating</span>
+                    <span className="dn-amount-pill-value">₹{effectiveAmount.toLocaleString("en-IN")}</span>
+                  </div>
                 ) : (
-                  "Choose an amount above"
+                  <div className="dn-amount-pill empty">Select an amount above</div>
                 )}
-              </p>
-              <button type="button" className="donate-razorpay-btn" onClick={handleRazorpayClick}>
-                👉 Donate Now
+              </div>
+
+              <button
+                type="button"
+                className="dn-razorpay-btn"
+                onClick={handleRazorpayClick}
+                disabled={effectiveAmount <= 0}
+              >
+                ❤️ Donate Now
               </button>
+
               {!paymentLink && (
-                <p className="donate-razorpay-note">
-                  Set <code>NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK</code> to your Razorpay Payment Link for
-                  one-click checkout.
+                <p className="dn-razorpay-note">
+                  Set <code>NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK</code> in your <code>.env</code> file to enable one-click checkout.
                 </p>
               )}
+
+              <div className="dn-receipt-note">
+                <span className="dn-receipt-icon">📧</span>
+                Your 80G receipt will be emailed within 24–48 hours of your donation.
+              </div>
             </div>
+
           </div>
-          <p className="donate-receipt-note" role="note">
-            Your 80G receipt will be shared on your registered email within 24–48 hours.
-          </p>
         </section>
 
-        <section className="about-page-section" aria-labelledby="trust-tax">
-          <h2 id="trust-tax">Trust &amp; Tax Benefits</h2>
-          <ul className="approach-list">
-            <li>Donations are eligible for tax benefits under Section 80G</li>
-            <li>Registered under 12A</li>
-            <li>Transparent and accountable usage of funds</li>
-            <li>Founder-led initiative</li>
-          </ul>
-          <p className="donate-highlight">👉 Your donation is secure and used for genuine social impact.</p>
-        </section>
+        {/* ===== TRUST & TAX ===== */}
+        <div className="dn-trust-row">
 
-        <section className="about-page-section trust-legal-box" aria-labelledby="transparency">
-          <h2 id="transparency">Transparency</h2>
-          <p>We are committed to:</p>
-          <ul className="about-page-mission-list">
-            <li>Ethical use of funds</li>
-            <li>Supporting real community needs</li>
-            <li>Maintaining transparency in all activities</li>
-          </ul>
-          <p className="trust-legal-note">
-            👉 We ensure your contribution reaches where it is needed the most.
-          </p>
-        </section>
+          <section className="dn-section" aria-labelledby="dn-trust-heading">
+            <div className="dn-section-label">Trust &amp; Tax</div>
+            <h2 id="dn-trust-heading">Why Donate With Us?</h2>
+            <ul className="dn-check-list">
+              {TRUST_POINTS.map((p) => (
+                <li key={p}><span className="dn-check">✔</span>{p}</li>
+              ))}
+            </ul>
+            <Link href="/80g-certificate" className="dn-cert-link">
+              View 80G Certificate →
+            </Link>
+          </section>
 
-        <section className="about-page-section donate-emotional" aria-label="Why donate">
-          <p>
-            A small contribution from you today can bring hope, education, and opportunity to
-            someone in need.
-          </p>
-        </section>
+          <section className="dn-quote-box" aria-label="Inspiration">
+            <div className="dn-quote-icon">💛</div>
+            <blockquote className="dn-quote">
+              "A small contribution from you today can bring hope, education, and opportunity
+              to someone in need."
+            </blockquote>
+            <p className="dn-quote-sub">— Eternal Spring Welfare Foundation</p>
+          </section>
+
+        </div>
+
       </div>
 
-      <section className="about-page-cta" aria-labelledby="donate-final-cta">
-        <h2 id="donate-final-cta">Be the Reason Someone Smiles Today</h2>
-        <div className="about-page-cta-actions">
-          <button
-            type="button"
-            className="about-page-cta-donate"
-            onClick={() => {
-              setMode("preset");
-              setSelected(100);
-              document.getElementById("impact-giving")?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
+      {/* ===== CTA ===== */}
+      <section className="dn-cta" aria-labelledby="dn-cta-heading">
+        <h2 id="dn-cta-heading">Be the Reason Someone Smiles Today</h2>
+        <p>Choose an amount and make a difference right now.</p>
+        <div className="dn-cta-actions">
+          <button type="button" className="dn-cta-btn primary"
+            onClick={() => { setMode("preset"); setSelected(100); scrollToGiving(); }}>
             Donate ₹100
           </button>
-          <button
-            type="button"
-            className="about-page-cta-donate"
-            onClick={() => {
-              setMode("preset");
-              setSelected(500);
-              document.getElementById("impact-giving")?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
+          <button type="button" className="dn-cta-btn primary"
+            onClick={() => { setMode("preset"); setSelected(500); scrollToGiving(); }}>
             Donate ₹500
           </button>
-          <button
-            type="button"
-            className="about-page-cta-join"
-            onClick={() => {
-              setMode("custom");
-              setCustomAmount("");
-              document.getElementById("impact-giving")?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Donate Custom
+          <button type="button" className="dn-cta-btn outline"
+            onClick={() => { setMode("custom"); setCustomAmount(""); scrollToGiving(); }}>
+            Custom Amount
           </button>
         </div>
       </section>
 
-      <section className="donate-support-bar" aria-label="Support contact">
-        <h2 className="donate-support-title">Have questions or want to contribute offline?</h2>
-        <p>
-          <a href="tel:8017555155">📞 8017555155</a>
-        </p>
-        <p>
-          <a href="mailto:info@eternalspringwelfarefoundation.org">
-            📧 info@eternalspringwelfarefoundation.org
-          </a>
-        </p>
-      </section>
+      {/* ===== SUPPORT STRIP ===== */}
+      <div className="dn-support-strip">
+        <div className="dn-support-inner">
+          <div className="dn-support-text">
+            <h2>Have questions or want to contribute offline?</h2>
+            <p>Our team is happy to help you with any queries.</p>
+          </div>
+          <div className="dn-support-links">
+            <a href="tel:8017555155" className="dn-support-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/>
+              </svg>
+              8017555155
+            </a>
+            <a href="mailto:info@eternalspringwelfarefoundation.org" className="dn-support-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+              </svg>
+              info@eternalspringwelfarefoundation.org
+            </a>
+          </div>
+        </div>
+      </div>
+
     </main>
   );
 }

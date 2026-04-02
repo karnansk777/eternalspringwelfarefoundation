@@ -189,3 +189,46 @@
 .about-page-cta-join:hover {
   background: rgba(230, 57, 0, 0.08);
 }
+
+/* ===== DIRECTOR QUOTE ===== */
+.director-quote-block {
+  margin: 0;
+  padding: 2rem 2rem 2rem 2.25rem;
+  border-left: 4px solid #e63900;
+  background: linear-gradient(135deg, #fff8f4 0%, #ffffff 100%);
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 4px 20px rgba(230, 57, 0, 0.07);
+  font-style: italic;
+}
+
+.director-quote-block p {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  color: #374151;
+  line-height: 1.8;
+}
+
+.director-quote-block p:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.director-quote-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-style: normal;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(230, 57, 0, 0.15);
+}
+
+.director-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.director-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #e63900;
+}

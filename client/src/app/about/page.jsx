@@ -111,6 +111,36 @@ export default function AboutPage() {
           </p>
         </section>
 
+        <section className="about-page-section" aria-labelledby="director-message">
+          <h2 id="director-message">Message from the Director</h2>
+          <blockquote className="director-quote-block">
+            <p>
+              At Eternal Spring Welfare Foundation, our journey began not with large resources,
+              but with a strong sense of responsibility towards society. Even as a newly established
+              organization, our work on the ground has already touched lives—through food distribution
+              drives, healthcare camps, support for survivors of abuse, and educational assistance for
+              underprivileged students.
+            </p>
+            <p>
+              We believe that true impact is not measured by the size of an organization, but by the
+              sincerity of its efforts. From helping a hungry family to supporting a woman in distress,
+              every action we take is guided by compassion, dignity, and long-term empowerment.
+            </p>
+            <p>
+              Our focus is not just charity, but sustainable change—enabling individuals to stand on
+              their own feet with confidence and opportunity.
+            </p>
+            <p>
+              As we move forward, we invite individuals, partners, and institutions to join hands with
+              us. Together, we can build a society where no one is left behind.
+            </p>
+            <footer className="director-quote-footer">
+              <span className="director-name">Deepan Das</span>
+              <span className="director-title">Director, Eternal Spring Welfare Foundation</span>
+            </footer>
+          </blockquote>
+        </section>
+
         <section className="about-page-section trust-legal-box" aria-labelledby="trust">
           <h2 id="trust">Trust &amp; Legal</h2>
           <p>

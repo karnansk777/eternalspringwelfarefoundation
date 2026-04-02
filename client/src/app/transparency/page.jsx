@@ -1,110 +1,177 @@
 import Link from "next/link";
-import "../about/AboutPage.css";
 import "./TransparencyPage.css";
 
+const BADGES = [
+  { label: "12A Registered", sub: "Provisional", icon: "✅" },
+  { label: "80G Approved",   sub: "Tax Benefit Available", icon: "🏛️" },
+  { label: "AAJCE4964H",     sub: "PAN Number", icon: "🪪" },
+  { label: "CALE08847G",     sub: "TAN Number", icon: "📋" },
+];
+
 const DOCS = [
-  { label: "12A Certificate", file: "12a-certificate.pdf" },
-  { label: "80G Certificate", file: "80g-certificate.pdf" },
-  { label: "PAN Card", file: "pan-card.pdf" },
-  { label: "NGO Darpan Registration", file: "ngo-darpan.pdf" },
+  { label: "12A Certificate",        desc: "Income Tax registration under Section 12A",  file: "12a-certificate.pdf",  icon: "📜" },
+  { label: "80G Certificate",        desc: "Tax exemption certificate for donors",        file: "80g-certificate.pdf",  icon: "🏅" },
+  { label: "PAN Card",               desc: "Permanent Account Number document",           file: "pan-card.pdf",         icon: "🪪" },
+  { label: "TAN Certificate",        desc: "Tax Deduction Account Number document",       file: "tan-certificate.pdf",  icon: "📋" },
+  { label: "NGO Darpan Registration",desc: "Government NGO registration record",          file: "ngo-darpan.pdf",       icon: "📑" },
+];
+
+const FINANCIAL_POINTS = [
+  "Proper utilization of funds for charitable purposes only",
+  "Detailed records maintained for all donations and expenses",
+  "Accountability ensured in every initiative we undertake",
+  "Annual review of financial activities by our leadership",
+];
+
+const ETHICAL_POINTS = [
+  "All activities are genuine and aligned with our mission",
+  "No funds are used for personal benefit of any individual",
+  "We follow all applicable laws and government guidelines",
+  "Open to audits and third-party verification at any time",
 ];
 
 export default function TransparencyPage() {
   return (
-    <main className="transparency-page">
-      <header className="about-page-hero">
-        <h1>Transparency &amp; Compliance</h1>
-        <p>
-          We are committed to transparency, accountability, and ethical practices in all our
-          activities.
-        </p>
+    <main className="tp-page">
+
+      {/* ===== HERO ===== */}
+      <header className="tp-hero">
+        <div className="tp-hero-inner">
+          <span className="tp-eyebrow">Our Commitment</span>
+          <h1>Transparency &amp; Compliance</h1>
+          <p>
+            We are committed to transparency, accountability, and ethical practices
+            in all our activities — so you can give with full confidence.
+          </p>
+        </div>
       </header>
 
-      <div className="transparency-inner">
-        <section className="transparency-section" aria-labelledby="about-transparency">
-          <h2 id="about-transparency">About this page</h2>
+      {/* ===== BADGE STRIP ===== */}
+      <div className="tp-badge-strip">
+        {BADGES.map((b) => (
+          <div key={b.label} className="tp-badge">
+            <span className="tp-badge-icon">{b.icon}</span>
+            <div className="tp-badge-text">
+              <strong>{b.label}</strong>
+              <span>{b.sub}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="tp-body">
+
+        {/* ===== INTRO ===== */}
+        <section className="tp-section" aria-labelledby="tp-about">
+          <div className="tp-section-label">About This Page</div>
+          <h2 id="tp-about">Why Transparency Matters to Us</h2>
           <p>
-            At Eternal Spring Welfare Foundation, we believe that trust is the foundation of every
-            meaningful contribution. We ensure that all our operations are compliant with legal
-            requirements and that funds are utilized responsibly.
+            At Eternal Spring Welfare Foundation, trust is the foundation of every meaningful
+            contribution. We ensure all our operations are fully compliant with legal requirements
+            and that every rupee donated is utilized responsibly toward community development.
           </p>
         </section>
 
-        <section className="transparency-section" aria-labelledby="legal-reg">
-          <h2 id="legal-reg">Legal registration details</h2>
-          <p>
-            Eternal Spring Welfare Foundation is a registered non-profit organization in India.
-          </p>
-          <ul className="legal-list">
-            <li>
-              <strong>12A Registration (Provisional)</strong>
-              <p className="legal-sub">Valid from AY 2026–27 to AY 2028–29</p>
-            </li>
-            <li>
-              <strong>80G Certification (Provisional)</strong>
-              <p className="legal-sub">
-                Donations are eligible for tax exemption under the Income Tax Act
-              </p>
-            </li>
-            <li>
-              <strong>PAN Number:</strong> AAJCE4964H
-            </li>
-            <li>
-              <strong>TAN Number:</strong> CALE08847G
-            </li>
-          </ul>
+        {/* ===== LEGAL DETAILS ===== */}
+        <section className="tp-section" aria-labelledby="tp-legal">
+          <div className="tp-section-label">Legal Registration</div>
+          <h2 id="tp-legal">Registration Details</h2>
+          <p>Eternal Spring Welfare Foundation is a registered non-profit organization in India.</p>
+          <div className="tp-legal-grid">
+            <div className="tp-legal-card">
+              <span className="tp-legal-icon">📄</span>
+              <div>
+                <strong>12A Registration</strong>
+                <p>Provisional — Valid from AY 2026–27 to AY 2028–29</p>
+              </div>
+            </div>
+            <div className="tp-legal-card">
+              <span className="tp-legal-icon">🏛️</span>
+              <div>
+                <strong>80G Certification</strong>
+                <p>Provisional — Donations eligible for tax exemption under the Income Tax Act</p>
+              </div>
+            </div>
+            <div className="tp-legal-card">
+              <span className="tp-legal-icon">🪪</span>
+              <div>
+                <strong>PAN Number</strong>
+                <p className="tp-code">AAJCE4964H</p>
+              </div>
+            </div>
+            <div className="tp-legal-card">
+              <span className="tp-legal-icon">📋</span>
+              <div>
+                <strong>TAN Number</strong>
+                <p className="tp-code">CALE08847G</p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="transparency-section" aria-labelledby="reg-address">
-          <h2 id="reg-address">Registered address</h2>
-          <address className="address-box">
-            36/B, Aswini Nagar, LP 72/8/6
-            <br />
-            Regent Park, Kolkata
-            <br />
-            West Bengal – 700040
-          </address>
+        {/* ===== ADDRESS ===== */}
+        <section className="tp-section" aria-labelledby="tp-address">
+          <div className="tp-section-label">Location</div>
+          <h2 id="tp-address">Registered Address</h2>
+          <div className="tp-address-card">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" className="tp-address-icon">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
+            <address className="tp-address">
+              36/B, Aswini Nagar, LP 72/8/6<br />
+              Regent Park, Kolkata<br />
+              West Bengal – 700040
+            </address>
+          </div>
         </section>
 
-        <section className="transparency-section" aria-labelledby="financial">
-          <h2 id="financial">Financial transparency</h2>
-          <p>We are committed to:</p>
-          <ul className="about-page-mission-list">
-            <li>Proper utilization of funds for charitable purposes</li>
-            <li>Maintaining records of all donations and expenses</li>
-            <li>Ensuring accountability in every initiative</li>
-          </ul>
-          <p className="transparency-accent-line">
-            👉 Every contribution is used to support real community needs.
-          </p>
-        </section>
+        {/* ===== FINANCIAL & ETHICAL — 2 columns ===== */}
+        <div className="tp-two-col">
 
-        <section className="transparency-section" aria-labelledby="documents">
-          <h2 id="documents">Documents</h2>
-          <p>
-            View or download official documents. Add your PDF files on the server as{" "}
-            <code>/documents/12a-certificate.pdf</code> and the other filenames below (see{" "}
-            <code>public/documents/README.txt</code> in the project).
-          </p>
-          <div className="documents-grid">
+          <section className="tp-section" aria-labelledby="tp-financial">
+            <div className="tp-section-label">Finances</div>
+            <h2 id="tp-financial">Financial Transparency</h2>
+            <ul className="tp-check-list">
+              {FINANCIAL_POINTS.map((p) => (
+                <li key={p}><span className="tp-check">✔</span>{p}</li>
+              ))}
+            </ul>
+            <p className="tp-accent">
+              Every contribution is used to support real community needs.
+            </p>
+          </section>
+
+          <section className="tp-section" aria-labelledby="tp-ethical">
+            <div className="tp-section-label">Ethics</div>
+            <h2 id="tp-ethical">Ethical Commitment</h2>
+            <ul className="tp-check-list">
+              {ETHICAL_POINTS.map((p) => (
+                <li key={p}><span className="tp-check">✔</span>{p}</li>
+              ))}
+            </ul>
+          </section>
+
+        </div>
+
+        {/* ===== DOCUMENTS ===== */}
+        <section className="tp-section" aria-labelledby="tp-docs">
+          <div className="tp-section-label">Downloads</div>
+          <h2 id="tp-docs">Official Documents</h2>
+          <p>View or download our official registration and compliance documents below.</p>
+          <div className="tp-docs-grid">
             {DOCS.map((doc) => (
-              <div key={doc.file} className="doc-row">
-                <span className="doc-row-title">{doc.label}</span>
-                <div className="doc-row-actions">
-                  <a
-                    className="doc-btn view"
-                    href={`/documents/${doc.file}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Document
+              <div key={doc.file} className="tp-doc-card">
+                <span className="tp-doc-icon">{doc.icon}</span>
+                <div className="tp-doc-info">
+                  <strong>{doc.label}</strong>
+                  <p>{doc.desc}</p>
+                </div>
+                <div className="tp-doc-actions">
+                  <a href={`/documents/${doc.file}`} target="_blank" rel="noopener noreferrer" className="tp-doc-btn outline">
+                    View
                   </a>
-                  <a
-                    className="doc-btn download"
-                    href={`/documents/${doc.file}`}
-                    download
-                  >
-                    Download PDF
+                  <a href={`/documents/${doc.file}`} download className="tp-doc-btn filled">
+                    Download
                   </a>
                 </div>
               </div>
@@ -112,40 +179,28 @@ export default function TransparencyPage() {
           </div>
         </section>
 
-        <section className="transparency-section" aria-labelledby="ethical">
-          <h2 id="ethical">Ethical commitment</h2>
-          <p>We ensure that:</p>
-          <ul className="approach-list">
-            <li>All activities are genuine and aligned with our mission</li>
-            <li>No funds are used for personal benefit</li>
-            <li>We follow all applicable laws and guidelines</li>
-          </ul>
-        </section>
-
-        <section
-          className="transparency-section trust-statement-box"
-          aria-labelledby="trust-statement"
-        >
-          <h2 id="trust-statement">Building Trust Through Transparency</h2>
+        {/* ===== TRUST STATEMENT ===== */}
+        <section className="tp-trust-box" aria-labelledby="tp-trust">
+          <div className="tp-trust-icon">🤝</div>
+          <h2 id="tp-trust">Building Trust Through Transparency</h2>
           <p>
-            We aim to build long-term trust with our donors, partners, and supporters by maintaining
-            openness and accountability in everything we do.
+            We aim to build long-term trust with our donors, partners, and supporters by
+            maintaining openness and accountability in everything we do.
           </p>
         </section>
+
       </div>
 
-      <section className="about-page-cta" aria-labelledby="transparency-cta">
-        <h2 id="transparency-cta">Support with Confidence</h2>
-        <p>Your donation is safe, transparent, and impactful.</p>
-        <div className="about-page-cta-actions">
-          <Link href="/donate" className="about-page-cta-donate">
-            ❤️ Donate Now
-          </Link>
-          <Link href="/contact" className="about-page-cta-join">
-            🤝 Partner With Us
-          </Link>
+      {/* ===== CTA ===== */}
+      <section className="tp-cta" aria-labelledby="tp-cta-heading">
+        <h2 id="tp-cta-heading">Support with Confidence</h2>
+        <p>Your donation is safe, transparent, and creates real impact.</p>
+        <div className="tp-cta-actions">
+          <Link href="/donate" className="tp-cta-btn primary">❤️ Donate Now</Link>
+          <Link href="/contact" className="tp-cta-btn outline">🤝 Partner With Us</Link>
         </div>
       </section>
+
     </main>
   );
 }

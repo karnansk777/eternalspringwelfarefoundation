@@ -10,11 +10,18 @@ export default function Navbar() {
 
   const [isAdminLogged, setIsAdminLogged] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setIsAdminLogged(!!token);
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -36,7 +43,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="nav-main">
+    <nav className={`nav-main${scrolled ? " scrolled" : ""}`}>
       <div className="nav-wrap">
 
         {/* LOGO */}
@@ -47,7 +54,10 @@ export default function Navbar() {
         {/* DESKTOP LINKS */}
         <div className="nav-links">
           {links.map((link) => {
-            const isActive = pathname === link.path;
+            const isActive =
+              link.path === "/"
+                ? pathname === "/"
+                : pathname === link.path || pathname.startsWith(link.path + "/");
             return (
               <Link
                 key={link.name}
@@ -74,7 +84,7 @@ export default function Navbar() {
             </>
           ) : (
             <Link href="/donate" className="nav-btn">
-              Donate
+              ❤️ Donate
             </Link>
           )}
         </div>
@@ -83,6 +93,7 @@ export default function Navbar() {
         <div
           className={`nav-hamburger ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
         >
           <span></span>
           <span></span>
@@ -98,7 +109,10 @@ export default function Navbar() {
             key={link.name}
             href={link.path}
             onClick={() => setMenuOpen(false)}
-            className="nav-mobile-link"
+            className={`nav-mobile-link ${
+            (link.path === "/" ? pathname === "/" : pathname === link.path || pathname.startsWith(link.path + "/"))
+              ? "active" : ""
+          }`}
           >
             {link.name}
           </Link>
@@ -115,7 +129,7 @@ export default function Navbar() {
           </>
         ) : (
           <Link href="/donate" className="nav-btn mobile">
-            Donate
+            ❤️ Donate
           </Link>
         )}
       </div>

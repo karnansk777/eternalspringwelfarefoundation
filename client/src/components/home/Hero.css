@@ -25,14 +25,13 @@
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    filter: brightness(0.5);
   }
-  
-  /* Dark overlay — slightly stronger so white/gold text reads clearly */
+
+  /* Light overlay — just enough to keep text readable without hiding the video */
   .hero-xyz-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.28);
     z-index: 1;
   }
   
